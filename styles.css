@@ -32,3 +32,43 @@
 .maintenance-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
 .maintenance-actions .action-button{min-height:42px}
 @media(max-width:600px){.maintenance-actions{display:grid;grid-template-columns:1fr;gap:8px}.maintenance-actions .action-button{width:100%}.manager-event-group{padding:9px}.manager-group-heading{font-size:14px;flex-wrap:wrap}.manager-event-group .event-card h3{font-size:13px}}
+
+/* Digital Judging extension — retains the official navy/gold PALARO visual identity */
+.judge-admin-panel{margin-bottom:15px}
+.judge-contest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,285px),1fr));gap:13px;margin:13px 0}
+.judge-contest-card{min-width:0;background:radial-gradient(circle at 100% 0,rgba(243,170,61,.13),transparent 55%),linear-gradient(145deg,#142e50,#0a1d35)}
+.judge-contest-card h3{font-size:16px;margin:0;line-height:1.35}
+.judge-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:15px 0}
+.judge-summary-grid span{background:rgba(15,48,82,.9);border:1px solid #305474;border-radius:9px;padding:9px 5px;text-align:center}
+.judge-summary-grid strong{display:block;font-size:22px;color:#ffdf8d}
+.judge-summary-grid small{font-size:10px;color:#b5c9e4;display:block;margin-top:3px}
+.judge-progress{height:8px;background:#0a1930;border-radius:999px;overflow:hidden;border:1px solid #2c4969;margin:12px 0}
+.judge-progress i{display:block;height:100%;background:linear-gradient(90deg,#2a8bff,#ffd474);border-radius:inherit;transition:width .25s ease}
+.judging-actions{display:flex;gap:7px;flex-wrap:wrap}
+.judging-actions button{flex:1;min-width:90px}
+.judging-roster .manager-row:last-child{border-bottom:0}
+.judge-checkboxes{max-height:43dvh;overflow:auto;border:1px solid #325579;border-radius:10px;padding:5px;margin:12px 0;overscroll-behavior:contain}
+.check-row{display:flex;gap:9px;align-items:center;padding:10px 8px;font-size:13px;color:#e3efff;min-height:42px}
+.check-row input{width:18px;height:18px;accent-color:#257aff;flex:none}
+.judge-criterion-list{display:grid;gap:10px;margin:12px 0}
+.judge-criterion-row{display:grid;grid-template-columns:minmax(0,1fr) 102px 36px 36px 36px;gap:5px;align-items:center;background:#0d2849;border:1px solid #2b527f;padding:8px;border-radius:10px}
+.judge-criterion-row .text-field{width:100%;min-width:0}
+.judge-criterion-row .action-button{padding:8px 4px;min-height:36px}
+.judge-form-top{display:grid;gap:8px;margin-bottom:13px}
+.judge-form-subtitle{margin:18px 0 9px}
+.judge-grade-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;background:#0b2341;padding:8px;border-radius:10px}
+.judge-grade-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:100%}
+.judge-score-card{border:1px solid #42678c;border-radius:12px;padding:12px;background:linear-gradient(145deg,#112b4b,#092038);min-width:0}
+.judge-score-head{display:flex;gap:9px;align-items:center;padding-bottom:12px;margin-bottom:10px;border-bottom:1px solid #315374}
+.judge-score-head .grade-logo{width:42px;height:42px}
+.judge-score-head strong{flex:1;font-size:15px}
+.judge-grade-total{font-weight:850;color:#f8d17a;font-variant-numeric:tabular-nums;font-size:12px;white-space:nowrap}
+.judge-score-line{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:9px 0;font-size:12px;color:#e6effe}
+.judge-score-line span{flex:1;min-width:0;overflow-wrap:anywhere}
+.judge-score-line small{display:block;color:#a9c4e6;font-size:10px;margin-top:4px}
+.judge-score-line input{width:98px;flex:none;text-align:center}
+.judge-roster-status{margin:14px 0;border-top:1px solid #2f4e76}
+.judge-roster-status .manager-row{padding:10px 3px}
+.judge-results-modal .report-table{min-width:450px}
+@media(max-width:750px){.judge-grade-grid{grid-template-columns:1fr}.judge-criterion-row{grid-template-columns:minmax(0,1fr) 80px 32px 32px 32px;gap:3px;padding:5px}.judge-criterion-row .text-field{font-size:12px;padding:8px 5px}.judge-criterion-row .action-button{font-size:11px}.judge-grade-choices{grid-template-columns:repeat(2,minmax(0,1fr))}.judge-score-line input{width:86px}.judging-actions{display:grid;grid-template-columns:1fr 1fr}.judge-summary-grid strong{font-size:19px}}
+@media(max-width:380px){.judge-criterion-row{grid-template-columns:minmax(0,1fr) 63px 29px 29px 29px}.judge-criterion-row .action-button{font-size:10px;padding:5px 1px}.judge-contest-card h3{font-size:14px}.judge-score-line input{width:76px}}
