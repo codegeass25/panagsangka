@@ -7,3 +7,17 @@
 @media print{.event-hero,.sidebar,.mobile-nav,.topbar-right,.page-footer,.action-button,.modal-backdrop{display:none!important}.body-shell{display:block}.main-shell{background:#fff}.topbar,main{padding:12px}.panel,.grade-hero-card{background:#fff!important;color:#111;border:1px solid #888;box-shadow:none}.ranking-table td,.ranking-table th{color:#111;background:#fff!important}.muted{color:#333}body{background:#fff;color:#000}}
 
 .more-menu{display:grid;gap:10px}.more-menu .action-button{min-height:48px;text-align:left;font-size:14px}
+
+/* Main-sport-only assignment panel: responsive and touch friendly. */
+.assignment-scroll{max-height:min(50dvh,450px);overflow-y:auto;overscroll-behavior:contain;padding:4px 4px 6px;scrollbar-gutter:stable}
+.assignment-group{border:1px solid rgba(123,167,212,.22);border-radius:12px;overflow:hidden;margin:0 0 12px;background:rgba(2,17,42,.28)}
+.assignment-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;font-weight:800;font-size:.78rem;color:#f7d787;background:rgba(28,88,140,.2);letter-spacing:.025em}
+.assignment-count{font-weight:500;color:#afc6df;font-size:.72rem;white-space:nowrap}
+.assignment-option{display:flex;align-items:center;gap:12px;padding:10px 14px;border-top:1px solid rgba(123,167,212,.18);cursor:pointer;min-height:54px;transition:background .15s}
+.assignment-option:hover{background:rgba(43,111,197,.18)}
+.assignment-option:has(input:checked){background:rgba(17,111,195,.16)}
+.assignment-option input{accent-color:#2a8bff;flex:0 0 auto;width:18px;height:18px}
+.assignment-option-text{display:flex;flex-direction:column;gap:3px;min-width:0}
+.assignment-option-text strong{font-weight:700;font-size:.88rem;color:#f7faff}
+.assignment-option-text small{color:#abc2df;font-size:.74rem;line-height:1.35}
+@media(max-width:520px){.assignment-scroll{max-height:48dvh}.assignment-option{padding:11px 10px}.assignment-heading{padding:11px 10px}.assignment-option-text strong{font-size:.85rem}}
