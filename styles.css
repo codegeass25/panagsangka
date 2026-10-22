@@ -21,3 +21,14 @@
 .assignment-option-text strong{font-weight:700;font-size:.88rem;color:#f7faff}
 .assignment-option-text small{color:#abc2df;font-size:.74rem;line-height:1.35}
 @media(max-width:520px){.assignment-scroll{max-height:48dvh}.assignment-option{padding:11px 10px}.assignment-heading{padding:11px 10px}.assignment-option-text strong{font-size:.85rem}}
+
+/* PANAGSANGKA event identity and safe database maintenance (2026 patch). */
+.manager-event-groups{display:grid;gap:17px}
+.manager-event-group{border:1px solid rgba(101,149,204,.24);border-radius:14px;background:rgba(7,28,55,.52);padding:12px;min-width:0}
+.manager-group-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 5px 14px;font-size:15px;font-weight:900;letter-spacing:.02em;color:#ffdb86}
+.manager-group-heading span{font-size:11px;color:#aec7e8;font-weight:600}
+.manager-event-group .event-card h3{font-size:15px;line-height:1.35;overflow-wrap:anywhere}
+.manager-event-group .event-card p{font-size:11px;line-height:1.4;overflow-wrap:anywhere}
+.maintenance-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.maintenance-actions .action-button{min-height:42px}
+@media(max-width:600px){.maintenance-actions{display:grid;grid-template-columns:1fr;gap:8px}.maintenance-actions .action-button{width:100%}.manager-event-group{padding:9px}.manager-group-heading{font-size:14px;flex-wrap:wrap}.manager-event-group .event-card h3{font-size:13px}}
