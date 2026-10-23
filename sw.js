@@ -1,5 +1,5 @@
-const CACHE='panagsangka-v8-original-poster-6935240df12b';
-const ASSETS=['./','./index.html','./config.js','./app.js','./judging-ui.js','./season-ui.js','./styles.css','./manifest.json','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/championship-poster-2026-6935240df12b.png'];
+const CACHE='panagsangka-v9-responsive-encoding-schedule';
+const ASSETS=['./','./index.html','./config.js','./app.js','./encoding-ui.js','./judging-ui.js','./season-ui.js','./styles.css','./manifest.json','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/championship-poster-2026-6935240df12b.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{

@@ -30,6 +30,7 @@
         <div class="topbar"><div class="page-heading"><div class="heading-icon" id="heading-icon">🏠</div><div><h2 id="page-title">Live Dashboard</h2><p id="page-description">Live tally and overall ranking of school intramural events</p></div></div>
           <div class="topbar-right"><span id="online-dot" class="connection-pill"><i></i><span>Connecting…</span></span><button id="profile-button" class="profile-button" type="button">👤 <span>Login</span></button></div>
         </div>
+        <aside id="encoding-status" class="encoding-status" hidden role="status" aria-live="polite"></aside>
         <main id="main-content" tabindex="-1"><div class="loading-screen"><div class="spinner"></div><p>Loading live standings…</p></div></main>
         <div class="page-footer">PANAGSANGKA 2026 <span>•</span> OFFICIAL LIVE TALLY <span>•</span> MANILA TIME</div>
       </div>
@@ -41,6 +42,7 @@
   <script src="https://panagsangka.mdmsportal.uk/socket.io/socket.io.js" async></script>
   <script src="judging-ui.js" defer></script>
   <script src="season-ui.js" defer></script>
+  <script src="encoding-ui.js" defer></script>
   <script src="app.js" defer></script>
 </body>
 </html>

@@ -39,7 +39,7 @@ function posterUrl(b,imageUrl){return !b.hero_poster||b.hero_poster===BUNDLED_PO
 function posterMarkup(b,esc,imageUrl,preview=false){
  const src=posterUrl(b,imageUrl),width=Number(b.hero_poster_width)||1672,height=Number(b.hero_poster_height)||941;
  const year=b.hero_poster_year||2026;
- return `<figure class="original-poster"><img class="original-poster-image" src="${esc(src)}" width="${width}" height="${height}" alt="Original championship poster · artwork year ${esc(year)}" fetchpriority="${preview?'auto':'high'}" decoding="async">${preview?'':`<figcaption class="poster-tools"><button type="button" class="action-button secondary smallbtn" data-action="expand-poster">View full poster</button>${Number(year)!==Number(b.year||2026)?`<span>Artwork year ${esc(year)} · current season ${esc(b.year)}. Artwork is unchanged.</span>`:''}</figcaption>`}</figure>`;
+ return `<figure class="original-poster" style="--poster-ratio:${width/height}" title="Artwork year ${esc(year)} · season ${esc(b.year||2026)}"><img class="original-poster-image" src="${esc(src)}" width="${width}" height="${height}" alt="Original championship poster · artwork year ${esc(year)}" fetchpriority="${preview?'auto':'high'}" decoding="async"></figure>`;
 }
 function heroMarkup(b,esc,imageUrl,preview=false){
  if(b.hero_mode!=='dynamic')return posterMarkup(b,esc,imageUrl,preview);

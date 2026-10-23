@@ -178,9 +178,7 @@
 .original-poster-image{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;filter:none;opacity:1;mix-blend-mode:normal;transform:none;border:0;border-radius:0}
 .original-poster::before,.original-poster::after{content:none}
 .poster-live-preview:has(>.original-poster),.season-archive-poster:has(>.original-poster){border-radius:0;overflow:visible}
-.poster-tools{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:7px 12px;background:#091a2c;color:#c5d5e8;font-size:12px}
-.poster-tools .action-button{min-height:34px}
-.poster-expanded{display:grid;gap:14px}.poster-expanded img{display:block;width:100%;height:auto;object-fit:contain}.poster-expanded a{overflow-wrap:anywhere}
+
 .poster-mode-picker,.hero-mode-picker{min-width:0}.hero-mode-picker legend{font-weight:800;color:#f9d580;padding:0 8px}
 .hero-mode-picker label{display:flex;gap:10px;align-items:center;min-height:44px;cursor:pointer}.hero-mode-picker input{accent-color:#f5c56b}
 .poster-upload-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
@@ -189,5 +187,42 @@
 .poster-supporting-text{font-size:clamp(10px,1.2vw,17px);line-height:1.4;color:#fff0cb;margin-top:8px;overflow-wrap:anywhere}
 .body-shell,.sidebar{min-height:60vh}
 .season-settings,.hero-settings-block,.brand-fields{min-width:0}
-@media(max-width:760px){.event-hero{min-height:0}.poster-tools{font-size:11px;gap:5px}.poster-tools .action-button{min-height:36px}.poster-logo-strip{gap:min(var(--logo-gap,12px),2vw)}}
+@media(max-width:760px){.event-hero{min-height:0}.poster-logo-strip{gap:min(var(--logo-gap,12px),2vw)}}
 @media(orientation:landscape) and (max-height:500px){.event-hero{min-height:0;height:auto}}
+
+/* Compact championship hero: the entire untouched poster is centered in a
+   stable intrinsic-ratio frame. Dark side space contains no copied artwork. */
+:root{--hero-cap:240px;--hero-art-cap:calc(var(--hero-cap) - 2px)}
+.event-hero{display:flex;align-items:center;justify-content:center;height:auto;min-height:0;max-height:var(--hero-cap);padding:0;border-bottom:2px solid #bd8b36;background:radial-gradient(ellipse at 50% 100%,#35261c88,transparent 65%),linear-gradient(100deg,#060d18,#12111b 50%,#060d18);overflow:hidden}
+.event-hero>.original-poster{flex:0 1 auto;width:min(100%,calc(var(--hero-art-cap) * var(--poster-ratio,1.776833156)));height:auto;max-height:var(--hero-art-cap);aspect-ratio:var(--poster-ratio,1672/941);background:transparent}
+.event-hero .original-poster-image{display:block;width:100%;height:auto;max-height:var(--hero-art-cap);object-fit:contain;filter:none;opacity:1}
+.event-hero .poster-stage{width:100%;min-height:0;height:var(--hero-art-cap);max-height:var(--hero-art-cap)}
+.event-hero .poster-stage .poster-content{min-height:0;height:auto;flex:none;width:min(1200px,100%);padding:4px 8px;gap:0;transform-origin:center}
+.event-hero .poster-stage .poster-logo-strip{min-height:0;margin:0 0 2px;gap:min(var(--logo-gap,12px),2vw)}
+.event-hero .poster-stage .poster-logo-slot{height:calc(var(--hero-art-cap) * var(--logo-factor,.16));width:calc(var(--hero-art-cap) * var(--logo-factor,.16));max-height:none;max-width:none}
+.event-hero .poster-stage.logos-small{--logo-factor:.12}.event-hero .poster-stage.logos-large{--logo-factor:.2}
+.event-hero .poster-stage .poster-school{font-size:calc(var(--hero-art-cap) * .065);line-height:1.1;padding:0}
+.event-hero .poster-stage .poster-title{font-size:calc(var(--hero-art-cap) * var(--title-factor,.25));line-height:1;max-width:100%;padding:0 3px}
+.event-hero .poster-stage.title-medium{--title-factor:.20}.event-hero .poster-stage.title-xl{--title-factor:.29}
+.event-hero .poster-stage .poster-year{font-size:calc(var(--hero-art-cap) * .065);line-height:1.1}
+.event-hero .poster-stage .poster-subtitle{font-size:calc(var(--hero-art-cap) * var(--subtitle-factor,.082));line-height:1.1}
+.event-hero .poster-stage.subtitle-small{--subtitle-factor:.065}.event-hero .poster-stage.subtitle-large{--subtitle-factor:.10}
+.event-hero .poster-stage .poster-tagline{display:block;font-size:calc(var(--hero-art-cap) * .05);line-height:1.1;margin-top:2px}
+.event-hero .poster-stage .poster-supporting-text{font-size:calc(var(--hero-art-cap) * .045);line-height:1.1;margin-top:2px}
+.body-shell,.sidebar{min-height:calc(100dvh - var(--hero-cap))}
+.encoding-status{margin:12px 22px 0;padding:12px 14px;border:1px solid #a37f43;border-radius:10px;background:#372c1c;color:#ffe6b4;font-size:12px;line-height:1.5}
+.encoding-status[hidden],[hidden]{display:none!important}
+.encoding-settings{margin-bottom:16px}.encoding-switches{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:15px}.encoding-switches label{display:flex;gap:9px;align-items:center;min-height:40px;font-size:13px}.encoding-switches input{accent-color:#f3c05e}
+.encoding-settings .actions{display:flex;flex-wrap:wrap;gap:8px}.encoding-settings details{margin-top:18px;border-top:1px solid #385575;padding-top:14px}.encoding-settings summary{cursor:pointer;color:#f2d38e;font-weight:750;margin-bottom:12px;line-height:1.5}.encoding-revoke-form{padding:12px;border:1px solid #805044;border-radius:9px;margin-top:12px}.encoding-modal-notice{font-size:12px;line-height:1.5}.encoding-settings table{min-width:540px}.encoding-settings input,.encoding-settings textarea,.encoding-settings select{max-width:100%}
+@media(max-width:1599px){:root{--hero-cap:210px}}
+@media(max-width:1024px){:root{--hero-cap:170px}}
+@media(max-width:600px){:root{--hero-cap:145px}.encoding-status{margin:10px 11px 0;font-size:11px;padding:10px}.encoding-switches{display:grid;gap:5px}}
+@media(orientation:landscape) and (max-height:500px) and (max-width:1000px){:root{--hero-cap:90px}.event-hero{height:auto;min-height:0}.event-hero .poster-stage .poster-logo-slot{width:calc(var(--hero-art-cap) * var(--logo-factor,.16))!important;height:calc(var(--hero-art-cap) * var(--logo-factor,.16))!important}}
+@media print{.encoding-settings,.encoding-status{display:none!important}}
+/* Latest direction: the original desktop poster follows screen width.
+   Its intrinsic proportions necessarily exceed the earlier desktop height cap. */
+@media(min-width:1025px){
+ .event-hero:has(>.original-poster){max-height:none}
+ .event-hero>.original-poster{width:100%;max-height:none}
+ .event-hero .original-poster-image{width:100%;height:auto;max-height:none}
+}
