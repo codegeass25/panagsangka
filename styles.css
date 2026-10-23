@@ -171,3 +171,23 @@
 .poster-stage.support-bold .poster-school,.poster-stage.support-bold .poster-subtitle{font-family:'Anton',Impact,sans-serif;letter-spacing:.09em}
 .poster-stage.support-classic .poster-school,.poster-stage.support-classic .poster-subtitle{font-family:Georgia,'Times New Roman',serif;font-weight:800;letter-spacing:.045em}
 @media(max-width:760px){.poster-stage.subtitle-small .poster-subtitle{font-size:11px}.poster-stage.subtitle-large .poster-subtitle{font-size:clamp(15px,4.8vw,23px)}}
+
+/* Original artwork is a separate rendering path: no overlay, filter or crop. */
+.event-hero{min-height:0}
+.original-poster{display:block;position:relative;width:100%;min-width:0;margin:0;padding:0;background:#090c13}
+.original-poster-image{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;filter:none;opacity:1;mix-blend-mode:normal;transform:none;border:0;border-radius:0}
+.original-poster::before,.original-poster::after{content:none}
+.poster-live-preview:has(>.original-poster),.season-archive-poster:has(>.original-poster){border-radius:0;overflow:visible}
+.poster-tools{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:7px 12px;background:#091a2c;color:#c5d5e8;font-size:12px}
+.poster-tools .action-button{min-height:34px}
+.poster-expanded{display:grid;gap:14px}.poster-expanded img{display:block;width:100%;height:auto;object-fit:contain}.poster-expanded a{overflow-wrap:anywhere}
+.poster-mode-picker,.hero-mode-picker{min-width:0}.hero-mode-picker legend{font-weight:800;color:#f9d580;padding:0 8px}
+.hero-mode-picker label{display:flex;gap:10px;align-items:center;min-height:44px;cursor:pointer}.hero-mode-picker input{accent-color:#f5c56b}
+.poster-upload-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
+.poster-school-watermark{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);width:var(--watermark-size,65%);height:90%;object-fit:contain;opacity:var(--watermark-opacity,.2);pointer-events:none}
+.poster-logo-strip{gap:var(--logo-gap,12px)}
+.poster-supporting-text{font-size:clamp(10px,1.2vw,17px);line-height:1.4;color:#fff0cb;margin-top:8px;overflow-wrap:anywhere}
+.body-shell,.sidebar{min-height:60vh}
+.season-settings,.hero-settings-block,.brand-fields{min-width:0}
+@media(max-width:760px){.event-hero{min-height:0}.poster-tools{font-size:11px;gap:5px}.poster-tools .action-button{min-height:36px}.poster-logo-strip{gap:min(var(--logo-gap,12px),2vw)}}
+@media(orientation:landscape) and (max-height:500px){.event-hero{min-height:0;height:auto}}
