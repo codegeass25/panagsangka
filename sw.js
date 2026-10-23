@@ -1,4 +1,4 @@
-const CACHE='panagsangka-v12-upload-responsive-20261023';
+const CACHE='panagsangka-v13-special-manager-review-20261024';
 const ASSETS=['./','./index.html','./config.js','./app.js','./encoding-ui.js','./judging-ui.js','./season-ui.js','./styles.css','./manifest.json','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/championship-poster-2026-6935240df12b.png','./assets/championship-panorama-2026.png','./assets/championship-mobile-upload-2026.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
