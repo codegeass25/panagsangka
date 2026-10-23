@@ -72,3 +72,30 @@
 .judge-results-modal .report-table{min-width:450px}
 @media(max-width:750px){.judge-grade-grid{grid-template-columns:1fr}.judge-criterion-row{grid-template-columns:minmax(0,1fr) 80px 32px 32px 32px;gap:3px;padding:5px}.judge-criterion-row .text-field{font-size:12px;padding:8px 5px}.judge-criterion-row .action-button{font-size:11px}.judge-grade-choices{grid-template-columns:repeat(2,minmax(0,1fr))}.judge-score-line input{width:86px}.judging-actions{display:grid;grid-template-columns:1fr 1fr}.judge-summary-grid strong{font-size:19px}}
 @media(max-width:380px){.judge-criterion-row{grid-template-columns:minmax(0,1fr) 63px 29px 29px 29px}.judge-criterion-row .action-button{font-size:10px;padding:5px 1px}.judge-contest-card h3{font-size:14px}.judge-score-line input{width:76px}}
+
+/* Dynamic PANAGSANGKA annual branding and read-only championship archive. */
+.brand-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;margin:18px 0}
+.brand-fields .field-group{min-width:0;margin:0}
+.brand-fields textarea{width:100%;resize:vertical;min-height:95px}
+.brand-preview{background:radial-gradient(circle at 90% 0%,rgba(247,164,61,.22),transparent 56%),linear-gradient(140deg,#071936,#163253);border:1px solid #9c752b;border-radius:16px;padding:21px;text-align:center;margin:17px 0;color:#eff6ff;overflow-wrap:anywhere}
+.brand-preview h2{font-size:clamp(22px,3.8vw,35px);color:#ffd26a;letter-spacing:.03em;line-height:1.12;margin:9px 0}
+.brand-preview-small,.brand-preview-keywords{letter-spacing:.16em;text-transform:uppercase;font-weight:750;color:#b9cdea;font-size:10px}
+.brand-preview p{letter-spacing:.06em;font-weight:750;font-size:12px;margin:5px 0}
+.brand-preview small{font-size:11px;color:#e6b956}
+.brand-preview-banner{display:grid;gap:6px;text-align:left;background:#0d2748;padding:17px;margin:22px 0 12px;border-radius:10px;border:1px solid #315575}
+.brand-preview-banner small{letter-spacing:.1em}.brand-preview-banner strong{font-size:17px}.brand-preview-banner span{font-size:11px;color:#bfd1ea}
+.season-switcher{display:flex;align-items:end;gap:15px;justify-content:space-between;flex-wrap:wrap}
+.season-switcher .field-group{min-width:min(100%,280px);flex:1;margin:0}
+.season-admin-actions{display:flex;gap:8px;flex-wrap:wrap}
+.season-trophy{display:flex;align-items:center;justify-content:space-between;gap:15px;background:linear-gradient(110deg,#102a4e,#253251);border:1px solid #765c29;border-radius:12px;padding:17px;margin-bottom:15px}
+.season-trophy h3{font-size:clamp(18px,3vw,26px);line-height:1.2;margin:6px 0;color:#ffdc87}
+.season-trophy .trophy-emoji{font-size:36px}
+.season-result-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 18px}
+.season-grade{min-width:0;display:flex;align-items:center;gap:10px;border:1px solid #315479;background:linear-gradient(110deg,#122f53,#0d2340);border-radius:10px;padding:12px}
+.season-grade .grade-logo{width:42px;height:42px;flex:none}
+.season-grade strong{font-size:13px;flex:1;min-width:0;overflow-wrap:anywhere}
+.season-points{font-weight:850;font-size:18px;color:#ffdb81;white-space:nowrap}
+.season-rank{font-size:12px;color:#c0d2e9}
+.season-settings>.section-row{gap:12px;flex-wrap:wrap}
+@media(max-width:750px){.brand-fields{grid-template-columns:1fr}.season-result-list{grid-template-columns:1fr}.season-admin-actions{width:100%;display:grid;grid-template-columns:1fr}.season-admin-actions button{width:100%}.season-switcher{display:grid}.brand-preview{padding:14px}.brand-preview-banner{padding:12px}}
+@media print{.season-switcher,.season-settings,.season-admin-actions{display:none!important}}
