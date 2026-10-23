@@ -253,3 +253,23 @@
 /* Keep a complete content viewport below the banner, even on short pages,
    so a sidebar click can position the page heading at the top of the screen. */
 @media(min-width:761px){.main-shell{min-height:100dvh}}
+
+/* MOBILE ARTWORK HOTFIX / 2026-10-23 (PANAGSANGKA 8)
+   The real production database is in Dynamic Hero mode. Unlike the original
+   poster mock used for earlier tests, Dynamic Hero did not contain the complete
+   graphic. Use the shipped official image on phones without changing desktop. */
+.event-hero>.mobile-official-banner{display:none}
+@media (max-width:760px) and (orientation:portrait){
+  .event-hero.hero-has-mobile-art{display:block;width:100%;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;overflow:hidden}
+  .event-hero.hero-has-mobile-art>.poster-stage,.event-hero.hero-has-mobile-art>.original-poster{display:none!important}
+  .event-hero.hero-has-mobile-art>.mobile-official-banner{display:block!important;width:100%;height:auto;max-width:100%;margin:0;border:0;padding:0;overflow:hidden;background:#090c13;line-height:0}
+  .event-hero.hero-has-mobile-art .mobile-official-picture{display:block;width:100%;height:auto}
+  .event-hero.hero-has-mobile-art .mobile-official-image{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;border:0;margin:0}
+}
+@media (orientation:landscape) and (max-height:500px) and (max-width:1000px){
+  .event-hero.hero-has-mobile-art{display:block;width:100%;height:clamp(96px,12.5vw,150px)!important;min-height:0!important;max-height:150px!important;padding:0!important;overflow:hidden}
+  .event-hero.hero-has-mobile-art>.poster-stage,.event-hero.hero-has-mobile-art>.original-poster{display:none!important}
+  .event-hero.hero-has-mobile-art>.mobile-official-banner{display:block!important;width:100%;height:100%;margin:0;border:0;overflow:hidden;line-height:0}
+  .event-hero.hero-has-mobile-art .mobile-official-picture{display:block;width:100%;height:100%}
+  .event-hero.hero-has-mobile-art .mobile-official-image{display:block;width:100%;height:100%;max-height:none;object-fit:fill;margin:0}
+}
