@@ -39,7 +39,11 @@ function posterUrl(b,imageUrl){return !b.hero_poster||b.hero_poster===BUNDLED_PO
 function posterMarkup(b,esc,imageUrl,preview=false){
  const src=posterUrl(b,imageUrl),width=Number(b.hero_poster_width)||1672,height=Number(b.hero_poster_height)||941;
  const year=b.hero_poster_year||2026;
- return `<figure class="original-poster" style="--poster-ratio:${width/height}" title="Artwork year ${esc(year)} · season ${esc(b.year||2026)}"><img class="original-poster-image" src="${esc(src)}" width="${width}" height="${height}" alt="Original championship poster · artwork year ${esc(year)}" fetchpriority="${preview?'auto':'high'}" decoding="async"></figure>`;
+ // The panoramic crop is only valid for the bundled original. Admin-uploaded
+ // posters keep their original aspect ratio and never inherit outdated artwork.
+ const bundled=src==='./assets/championship-poster-2026-6935240df12b.png';
+ const panorama=bundled&&!preview?'<img class="panoramic-poster-image" src="./assets/championship-panorama-2026.png" width="1920" height="240" alt="" aria-hidden="true" decoding="async">':'';
+ return `<figure class="original-poster${panorama?' bundled-poster':''}" style="--poster-ratio:${width/height}" title="Artwork year ${esc(year)} · season ${esc(b.year||2026)}"><img class="original-poster-image" src="${esc(src)}" width="${width}" height="${height}" alt="Original championship poster · artwork year ${esc(year)}" fetchpriority="${preview?'auto':'high'}" decoding="async">${panorama}</figure>`;
 }
 function heroMarkup(b,esc,imageUrl,preview=false){
  if(b.hero_mode!=='dynamic')return posterMarkup(b,esc,imageUrl,preview);
