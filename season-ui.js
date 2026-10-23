@@ -36,14 +36,29 @@ function imageFor(id,b,imageUrl){
 }
 const BUNDLED_POSTER='/assets/championship-poster-2026-6935240df12b.png';
 function posterUrl(b,imageUrl){return !b.hero_poster||b.hero_poster===BUNDLED_POSTER?'./assets/championship-poster-2026-6935240df12b.png':imageUrl(b.hero_poster);}
+// These two uploaded 2026 files belong to the SAME official design. Keep the
+// original high-resolution upload on phones and its separately arranged wide
+// artwork on desktops. This pairing is hash-bound, never applied to an
+// unrelated season, artwork upload, or branding preview.
+const OFFICIAL_FULL_2026='e6b9258fa2ea1d5e78230548397a21d59c8e94d066a6b4700b66a97c40283335';
+const OFFICIAL_WIDE_2026='b769431261409ed92d8dbd0ce1df328b5e518a45c44e7def21377123ba05d5ff';
 function posterMarkup(b,esc,imageUrl,preview=false){
- const src=posterUrl(b,imageUrl),width=Number(b.hero_poster_width)||1672,height=Number(b.hero_poster_height)||941;
+ const uploaded=posterUrl(b,imageUrl),originalWidth=Number(b.hero_poster_width)||1672,originalHeight=Number(b.hero_poster_height)||941;
  const year=b.hero_poster_year||2026;
- // The panoramic crop is only valid for the bundled original. Admin-uploaded
- // posters keep their original aspect ratio and never inherit outdated artwork.
- const bundled=src==='./assets/championship-poster-2026-6935240df12b.png';
- const panorama=bundled&&!preview?'<img class="panoramic-poster-image" src="./assets/championship-panorama-2026.png" width="1920" height="240" alt="" aria-hidden="true" decoding="async">':'';
- return `<figure class="original-poster${panorama?' bundled-poster':''}" style="--poster-ratio:${width/height}" title="Artwork year ${esc(year)} · season ${esc(b.year||2026)}"><img class="original-poster-image" src="${esc(src)}" width="${width}" height="${height}" alt="Original championship poster · artwork year ${esc(year)}" fetchpriority="${preview?'auto':'high'}" decoding="async">${panorama}</figure>`;
+ const bundled=uploaded==='./assets/championship-poster-2026-6935240df12b.png';
+ const digest=String(b.hero_poster_sha256||'').toLowerCase();
+ const fileDigest=String(b.hero_poster||'').match(/poster-([a-f0-9]{64})\.(?:png|webp|jpg)$/)?.[1]||'';
+ const knownArtwork=!preview&&Number(b.year||2026)===2026&&Number(year)===2026&&(
+  bundled||[OFFICIAL_FULL_2026,OFFICIAL_WIDE_2026].includes(digest)||[OFFICIAL_FULL_2026,OFFICIAL_WIDE_2026].includes(fileDigest));
+ const isWideUpload=[OFFICIAL_WIDE_2026].includes(digest)||fileDigest===OFFICIAL_WIDE_2026;
+ // An Admin preview always shows the actual uploaded file, without swaps.
+ const source=knownArtwork&&isWideUpload?'./assets/championship-mobile-upload-2026.png':uploaded;
+ const width=knownArtwork&&isWideUpload?1981:originalWidth,height=knownArtwork&&isWideUpload?794:originalHeight;
+ const panorama=knownArtwork?'<img class="panoramic-poster-image" src="./assets/championship-panorama-2026.png" width="1920" height="240" alt="" aria-hidden="true" decoding="async">':'';
+ // Arbitrary user-uploaded posters need a filled visual background AND an
+ // uncropped sharp foreground. No stretch or clipping of uploaded text/logos.
+ const ambient=!preview&&!knownArtwork?`<img class="poster-ambient-image" src="${esc(source)}" alt="" aria-hidden="true" decoding="async">`:'';
+ return `<figure class="original-poster${panorama?' bundled-poster':''}${ambient?' immersive-poster':''}" style="--poster-ratio:${width/height}" title="Artwork year ${esc(year)} · season ${esc(b.year||2026)}">${ambient}<img class="original-poster-image" src="${esc(source)}" width="${width}" height="${height}" alt="Original championship poster · artwork year ${esc(year)}" fetchpriority="${preview?'auto':'high'}" decoding="async">${panorama}</figure>`;
 }
 // The public 2026 live system can be configured for a Dynamic Hero (including
 // the supplied database). Give phones the actual official poster artwork rather

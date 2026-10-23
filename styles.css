@@ -273,3 +273,25 @@
   .event-hero.hero-has-mobile-art .mobile-official-picture{display:block;width:100%;height:100%}
   .event-hero.hero-has-mobile-art .mobile-official-image{display:block;width:100%;height:100%;max-height:none;object-fit:fill;margin:0}
 }
+
+/* Uploaded artwork, all screen sizes (2026-10-23 v12).
+   Known 2026 upload pair: exact same artwork in portrait/mobile and panoramic
+   arrangements. Unrecognized uploads: full-width, image-derived ambience with
+   original sharp image always contained, so text/emblems remain intact. */
+.event-hero.hero-immersive{width:100%;height:var(--hero-cap);max-height:var(--hero-cap);overflow:hidden}
+.event-hero.hero-immersive>.original-poster{position:relative;flex:1 1 auto;display:grid;place-items:center;width:100%;max-width:none;min-width:0;height:100%;max-height:none;aspect-ratio:auto;overflow:hidden;background:#0b1020}
+.event-hero.hero-immersive .poster-ambient-image{position:absolute;display:block;inset:-7%;width:114%;height:114%;max-width:none;object-fit:cover;object-position:50% 50%;filter:blur(20px) brightness(.54) saturate(1.28);transform:scale(1.05);pointer-events:none;z-index:0}
+.event-hero.hero-immersive .original-poster-image{position:relative;z-index:1;display:block;width:100%;height:100%;max-height:none;object-fit:contain;object-position:center;filter:drop-shadow(0 0 16px #030713d9)}
+@media(max-width:760px) and (orientation:portrait){
+ .event-hero.hero-immersive{height:auto;max-height:none}
+ .event-hero.hero-immersive>.original-poster{display:block;width:100%;height:auto;max-height:none;aspect-ratio:var(--poster-ratio,1672/941)}
+ .event-hero.hero-immersive .poster-ambient-image{display:none}
+ .event-hero.hero-immersive .original-poster-image{display:block;width:100%;height:auto;max-height:none;object-fit:contain;filter:none}
+}
+
+/* Override the older 145px mobile cap even for arbitrary uploaded aspect
+   ratios; priority matches the legacy :not() + :has() selector above. */
+@media(max-width:760px) and (orientation:portrait){
+ .event-hero:not(.hero-panoramic):has(>.original-poster){height:auto;max-height:none;min-height:0}
+ .event-hero.hero-immersive:not(.hero-panoramic):has(>.original-poster){height:auto;max-height:none}
+}
