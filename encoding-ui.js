@@ -36,10 +36,12 @@ window.PanagEncodingUI={create({state,api,esc,flash}){
   for(const [id,op,inputSelector] of [['placements-form','placement_save','.placement-select'],['correction-form','correction_request','.correction-select,textarea'],['judge-ballot-form','judge_save','[data-j-score]']]){
    const form=document.getElementById(id);if(!form)continue;const event=Number(form.dataset.id||form.dataset.event);
    form.querySelectorAll(inputSelector).forEach(el=>gate(el,allowed(op,event,true)));
-   form.querySelectorAll('button[type="submit"]').forEach(el=>{const submitting=el.value==='submit';const required=id==='placements-form'?'placement_submit':id==='judge-ballot-form'?'judge_submit':'correction_request';gate(el,allowed(op,event,true)&&(!submitting||allowed(required,event,true)));});
+   form.querySelectorAll('button[type="submit"]').forEach(el=>{const submitting=el.value==='submit';const required=id==='placements-form'?'placement_submit':id==='judge-ballot-form'?'judge_submit':'correction_request';gate(el,submitting?allowed(required,event,true)&&(allowed(op,event,true)||Number(form.dataset.revision)>0):allowed(op,event,true));});
   }
   document.querySelectorAll('[data-action="request-correction"]').forEach(el=>gate(el,allowed('correction_request',Number(el.dataset.id),!!el.closest('.modal'))));
   document.querySelectorAll('[data-j-action="manager-submit-judging"]').forEach(el=>gate(el,allowed('judged_results_submit',Number(el.dataset.jId),true)));
+  const review=document.getElementById('judge-manager-review-form');
+  if(review){const submit=review.querySelector('[data-review-submit]');if(submit)submit.disabled=!review.elements.confirmed_review.checked||!allowed('judged_results_submit',Number(review.dataset.event),true);}
   for(const [selector,op,label] of [['[data-action="encode"]','placement_save','View Placements'],['[data-j-action="open-ballot"]','judge_save','View Score Sheet']])document.querySelectorAll(selector).forEach(el=>{if(!el.dataset.encodingLabel)el.dataset.encodingLabel=el.textContent;const locked=restricted&&!allowed(op,Number(el.dataset.id||el.dataset.jId));el.textContent=locked?label:el.dataset.encodingLabel;el.title=locked?'Encoding is locked; assigned records remain readable.':'';});
   const conflict=document.getElementById('encoding-draft-conflict');if(conflict)conflict.hidden=state.encodingDraft?.revision===state.encodingAdmin?.schedule?.revision&&state.encodingDraft?.year===state.encodingAdmin?.schedule?.year;
   const live=document.getElementById('encoding-admin-status');if(live)live.textContent=statusText();

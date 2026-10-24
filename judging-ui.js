@@ -60,8 +60,12 @@ window.PanagJudgingUI={create(ctx){
  }
  async function doSubmitBallot(form,submitter){if(!opened)throw Error('Scoring sheet missing');const scores=[];for(const el of form.querySelectorAll('[data-j-score]'))if(el.value!==''){const n=Number(el.value);if(!Number.isFinite(n)||n<0||n>Number(el.max))throw Error('Enter valid scores within each criterion maximum');scores.push({grade:Number(el.dataset.grade),criterion_id:Number(el.dataset.criterion),score:n});}
   if(submitter?.value==='submit'&&scores.length!==opened.participants.length*opened.criteria.length)throw Error('Complete every grade and criterion before submission');
-  const id=Number(form.dataset.event);const saved=await PUT('/api/judging/events/'+id+'/ballot',{scores,expected_revision:Number(form.dataset.revision)});
-  if(submitter?.value==='submit')await POST('/api/judging/events/'+id+'/submit',{expected_revision:saved.revision});closeModal();opened=null;await loadAll(true);flash(submitter?.value==='submit'?'Official judge ballot submitted and locked':'Draft judge scores saved');
+  const id=Number(form.dataset.event);
+  if(!ctx.encodingUI||ctx.encodingUI.allowed('judge_save',id,true)){
+   const saved=await PUT('/api/judging/events/'+id+'/ballot',{scores,expected_revision:Number(form.dataset.revision)});
+   form.dataset.revision=String(saved.revision);
+  }else if(submitter?.value!=='submit')throw Error('Judge draft saving is locked');
+  if(submitter?.value==='submit')await POST('/api/judging/events/'+id+'/submit',{expected_revision:Number(form.dataset.revision)});closeModal();opened=null;await loadAll(true);flash(submitter?.value==='submit'?'Official judge ballot submitted and locked':'Draft judge scores saved');
  }
  async function handleSubmit(form,submitter){try{
   const fd=new FormData(form),id=Number(form.dataset.event);
@@ -96,7 +100,8 @@ window.PanagJudgingUI={create(ctx){
   }}catch(e){flash(e.message||String(e),'bad');}}
  document.addEventListener('click',e=>{const el=e.target.closest('[data-j-action]');if(el){e.preventDefault();handleClick(el.dataset.jAction,el.dataset.jId,el);}});
  document.addEventListener('submit',e=>{if(/^(judge-(create|edit|panel|config|ballot|tie|manager-review)-form)$/.test(e.target.id)){e.preventDefault();handleSubmit(e.target,e.submitter);}});
- document.addEventListener('input',e=>{if(e.target.closest('#judge-config-form'))updateWeight();if(e.target.matches('[data-j-score]'))scorePreview();if(e.target.matches('#judge-manager-review-form [name=confirmed_review]')){const submit=e.target.closest('form')?.querySelector('[data-review-submit]');if(submit)submit.disabled=!e.target.checked;}});
- document.addEventListener('change',e=>{if(e.target.matches('#judge-manager-review-form [name=confirmed_review]')){const submit=e.target.closest('form')?.querySelector('[data-review-submit]');if(submit)submit.disabled=!e.target.checked;}});
+ function reviewControls(input){const form=input.closest('form'),submit=form?.querySelector('[data-review-submit]');if(submit)submit.disabled=!input.checked||!!ctx.encodingUI&&!ctx.encodingUI.allowed('judged_results_submit',Number(form.dataset.event),true);}
+ document.addEventListener('input',e=>{if(e.target.closest('#judge-config-form'))updateWeight();if(e.target.matches('[data-j-score]'))scorePreview();if(e.target.matches('#judge-manager-review-form [name=confirmed_review]'))reviewControls(e.target);});
+ document.addEventListener('change',e=>{if(e.target.matches('#judge-manager-review-form [name=confirmed_review]'))reviewControls(e.target);});
  return {admin,judgeHome,summary,managerPreview};
 }};
