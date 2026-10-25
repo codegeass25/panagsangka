@@ -1,5 +1,5 @@
-const CACHE='panagsangka-v15-live-arena-3-20261024';
-const ASSETS=['./','./index.html','./config.js','./app.js','./arena.js','./arena.css','./encoding-ui.js','./judging-ui.js','./season-ui.js','./styles.css','./manifest.json','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/championship-poster-2026-6935240df12b.png','./assets/championship-panorama-2026.png','./assets/championship-mobile-upload-2026.png'];
+const CACHE='panagsangka-v16-command-center-20261025';
+const ASSETS=['./','./index.html','./config.js','./app.js','./dashboard.js','./dashboard.css','./assets/dashboard-stadium-20261025.webp','./arena.js','./arena.css','./encoding-ui.js','./judging-ui.js','./season-ui.js','./styles.css','./manifest.json','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/championship-poster-2026-6935240df12b.png','./assets/championship-panorama-2026.png','./assets/championship-mobile-upload-2026.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{
