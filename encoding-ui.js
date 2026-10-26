@@ -33,10 +33,10 @@ window.PanagEncodingUI={create({state,api,esc,flash}){
   if(banner){banner.hidden=!restricted;if(restricted)banner.textContent=statusText();}
   const modal=document.querySelector('.modal');
   if(modal&&restricted){let notice=modal.querySelector('[data-encoding-notice]');if(!notice){notice=document.createElement('div');notice.className='callout encoding-modal-notice';notice.dataset.encodingNotice='1';modal.querySelector('.modal-body').prepend(notice);}notice.textContent=Number(modal.dataset.season)!==state.encoding?.year?'This form belongs to an earlier season and is permanently read-only. Close it and reload the active season.':statusText();}
-  for(const [id,op,inputSelector] of [['placements-form','placement_save','.placement-select'],['correction-form','correction_request','.correction-select,textarea'],['judge-ballot-form','judge_save','[data-j-score]']]){
+  for(const [id,op,inputSelector] of [['sports-result-form','placement_save','[data-sports-value]'],['sports-correction-form','correction_request','[data-sports-value],textarea'],['placements-form','placement_save','.placement-select'],['correction-form','correction_request','.correction-select,textarea'],['judge-ballot-form','judge_save','[data-j-score]']]){
    const form=document.getElementById(id);if(!form)continue;const event=Number(form.dataset.id||form.dataset.event);
    form.querySelectorAll(inputSelector).forEach(el=>gate(el,allowed(op,event,true)));
-   form.querySelectorAll('button[type="submit"]').forEach(el=>{const submitting=el.value==='submit';const required=id==='placements-form'?'placement_submit':id==='judge-ballot-form'?'judge_submit':'correction_request';gate(el,submitting?allowed(required,event,true)&&(allowed(op,event,true)||Number(form.dataset.revision)>0):allowed(op,event,true));});
+   form.querySelectorAll('button[type="submit"]').forEach(el=>{const submitting=el.value==='submit';const required=['placements-form','sports-result-form'].includes(id)?'placement_submit':id==='judge-ballot-form'?'judge_submit':'correction_request';gate(el,(submitting?allowed(required,event,true)&&(allowed(op,event,true)||Number(form.dataset.revision)>0):allowed(op,event,true))&&el.dataset.sportsInvalid!=='1');});
   }
   document.querySelectorAll('[data-action="request-correction"]').forEach(el=>gate(el,allowed('correction_request',Number(el.dataset.id),!!el.closest('.modal'))));
   document.querySelectorAll('[data-j-action="manager-submit-judging"]').forEach(el=>gate(el,allowed('judged_results_submit',Number(el.dataset.jId),true)));
