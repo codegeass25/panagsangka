@@ -98,7 +98,7 @@ window.PanagEncodingUI={create({state,api,esc,flash}){
  document.addEventListener('click',async e=>{const action=e.target.closest('[data-e-action]')?.dataset.eAction;if(!action)return;try{await loadAdmin();if(action==='discard'){state.encodingDraft=null;replaceSettings();}else if(action==='rebase'){const d=draft(),s=state.encodingAdmin.schedule;if(d.year!==s.year)throw Error('The season changed. Keep a copy of your draft, then discard it to edit the active season.');d.revision=s.revision;document.querySelectorAll('#encoding-override-form,.encoding-revoke-form').forEach(f=>f.dataset.revision=s.revision);decorate();flash('Draft preserved. Review the latest official schedule before publishing.');}}catch(err){flash(err.message,'bad');}});
  function start(){setInterval(()=>{const s=state.encoding;decorate();if(!s)return;const t=now(),boundary=[s.starts_at,s.ends_at,...(s.overrides||[]).map(o=>o.expires_at)].filter(x=>x!==null&&x<=t).join(',');if(boundary!==lastBoundary){lastBoundary=boundary;refresh();}},1000);setInterval(refresh,15000);}
  function clear(){state.encoding=null;state.encodingAdmin=null;state.encodingDraft=null;owner=state.token;}
- return {settings,decorate,refresh,loadAdmin,start,allowed,clear,dirty:()=>!!state.encodingDraft?.dirty,
+ return {serverNow:now,settings,decorate,refresh,loadAdmin,start,allowed,clear,dirty:()=>!!state.encodingDraft?.dirty,
   headers:(method,path)=>writeAction(method,path)?{'X-Panagsangka-Season':String(document.querySelector('.modal')?.dataset.season||state.encoding?.year||state.public?.branding?.year||'')}: {},
   connected:()=>{if(owner!==state.token){owner=state.token;state.encodingDraft=null;}return refresh();}};
 }};
