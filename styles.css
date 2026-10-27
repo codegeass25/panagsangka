@@ -323,3 +323,31 @@
 .modal.wide:has(.sports-workspace){width:min(100%,1240px)}
 .sports-workspace .report-table th{color:#31536f;background:#eff5fb}
 .sports-workspace .report-table td{color:#173149;border-color:#dae5ef}
+/* Audience Engagement Control Center, scoped to existing Admin Settings. */
+#engagement-controls{padding-top:20px;border-top:2px solid #bf9a44;margin-top:22px}
+#engagement-controls h4{font-size:14px;letter-spacing:1px;color:#123c68;border-bottom:1px solid #b7c7db;padding-bottom:9px;margin:26px 0 14px}
+#engagement-controls p{font-size:12px;line-height:1.6}
+.engagement-reopen{border:1px solid #315c8d;border-radius:12px;background:linear-gradient(120deg,#081c38,#123f6d);color:#f2f7ff;padding:17px}
+#engagement-controls .engagement-reopen h4{color:#f7d77d;border-color:#f6d97955;margin-top:0}.engagement-reopen>strong{color:#f8df98;letter-spacing:.8px;font-size:17px}
+#engagement-controls input:not([type=checkbox]),#engagement-controls select,#engagement-controls textarea,.engagement-dialog input:not([type=checkbox]),.engagement-dialog select,.engagement-dialog textarea{box-sizing:border-box;width:100%;min-width:0;padding:10px;border:1px solid #afc1d5;border-radius:7px;background:#fff;color:#173957;font:inherit}
+#engagement-controls .cheer-fields label{display:flex;flex-direction:column;gap:6px;font-size:12px}
+#engagement-controls .actions{display:flex;flex-wrap:wrap;gap:8px}
+.engagement-dictionary,.engagement-history{padding:14px;border:1px solid #c6d3e1;border-radius:10px;margin:14px 0}
+.engagement-dictionary summary,.engagement-history summary{font-size:12px;font-weight:800;cursor:pointer}
+.engagement-rule{display:grid;grid-template-columns:minmax(100px,1fr) 80px 90px 55px 30px;gap:7px;margin:8px 0;align-items:center}.engagement-rule label{display:flex;gap:4px;align-items:center;font-size:11px}
+.engagement-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:15px 0}.engagement-stats>div{background:#0c294a;border:1px solid #42658c;border-radius:10px;padding:15px 10px;color:#fff}.engagement-stats b{display:block;font-size:25px;color:#f8d77d}.engagement-stats span{font-size:10px}
+.engagement-comments{max-height:620px;overflow:auto;margin:18px 0}.engagement-comment{background:#f5f8fc;border:1px solid #c5d2e1;border-left:3px solid #2c6db1;border-radius:9px;padding:13px;margin:10px 0;overflow-wrap:anywhere}.engagement-comment header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:7px}.engagement-comment small{font-size:10px;color:#45627c}.engagement-comment button{border:1px solid #7595b6;background:#fff;color:#173d64;padding:6px 9px;border-radius:6px;font-size:11px;cursor:pointer}
+.engagement-audit{max-height:370px;overflow:auto}.engagement-audit p{border-bottom:1px solid #ccd9e6;padding-bottom:10px;overflow-wrap:anywhere}
+#engagement-controls [data-e-message]{font-weight:700;color:#185286;min-height:22px}
+.engagement-dialog{width:min(540px,calc(100vw - 32px));border:1px solid #b99b53;border-radius:15px;padding:25px;color:#163351;box-shadow:0 25px 80px #0008;max-height:90dvh;overflow:auto}.engagement-dialog::backdrop{background:#020a1dcc;backdrop-filter:blur(4px)}.engagement-dialog h3{color:#15395f}.engagement-dialog label{display:block;margin:13px 0;font-size:12px}.engagement-dialog textarea{min-height:90px}.engagement-dialog .cheer-toggle{display:flex;align-items:center;gap:9px}.engagement-dialog [data-dialog-error]{color:#a62828;font-size:12px}.engagement-dialog .actions{display:flex;gap:9px}
+@media(max-width:650px){.engagement-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.engagement-stats>div:last-child{grid-column:1/-1}.engagement-rule{grid-template-columns:minmax(70px,1fr) 62px 70px 48px 25px;gap:3px}.engagement-rule input:not([type=checkbox]),.engagement-rule select{padding:7px 3px!important;font-size:10px!important}#engagement-controls .cheer-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Explicit dark surfaces keep every moderation record readable in the existing theme. */
+#engagement-controls h4{color:#f3d789;border-color:#46678a}
+#engagement-controls .engagement-comment{background:#102d4c;color:#f0f6ff;border-color:#456889;border-left-color:#59a4ef}
+#engagement-controls .engagement-comment small{color:#b8cee6}
+#engagement-controls .engagement-comment button{background:#194674;color:#fff;border-color:#7098c0}
+#engagement-controls [data-e-message]{color:#f6d68a}
+#engagement-controls .engagement-dictionary,#engagement-controls .engagement-history{border-color:#527196}
+.engagement-dialog{background:#0c213c;color:#f3f7ff}.engagement-dialog h3{color:#f7d786}
+.engagement-dialog input:not([type=checkbox]),.engagement-dialog select,.engagement-dialog textarea{background:#06192f;color:#f3f7ff;border-color:#5c7da0}
+.engagement-dialog [data-dialog-error]{color:#ffb5b5}
