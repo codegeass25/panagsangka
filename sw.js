@@ -1,7 +1,7 @@
-const CACHE='panagsangka-v20-fan-zone-20261028';
-const ASSETS=['./','./index.html','./config.js','./app.js','./scoring-core.js','./sports-ui.js','./reports-ui.js','./dashboard.js','./dashboard.css','./assets/dashboard-stadium-20261025.webp','./arena.js','./arena.css','./cheer-settings.js','./engagement-settings.js','./arena-comments.js','./encoding-ui.js','./judging-ui.js','./season-ui.js','./styles.css','./manifest.json','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/championship-poster-2026-6935240df12b.png','./assets/championship-panorama-2026.png','./assets/championship-mobile-upload-2026.png'];
+const CACHE='panagsangka-v21-verify2-20261028';
+const ASSETS=['./','./index.html','./config.js','./app.js','./verify-results.js','./scoring-core.js','./sports-ui.js','./reports-ui.js','./dashboard.js','./dashboard.css','./assets/dashboard-stadium-20261025.webp','./arena.js','./arena.css','./cheer-settings.js','./engagement-settings.js','./arena-comments.js','./encoding-ui.js','./judging-ui.js','./season-ui.js','./styles.css','./manifest.json','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/championship-poster-2026-6935240df12b.png','./assets/championship-panorama-2026.png','./assets/championship-mobile-upload-2026.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('panagsangka-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{
   const url=new URL(e.request.url);
   // Public/authenticated API state is always live; never cache tokens or results.
