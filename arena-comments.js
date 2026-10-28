@@ -59,10 +59,10 @@ window.PanagArenaComments={create(ctx){
   const max=settings?.max_length||120,remaining=Math.ceil(Math.max(0,waitUntil-performance.now())/1000),input=$('[data-comment-input]'),count=[...(input?.value||'')].length,permanent=restricted?.permanent,restrictedNow=!!restricted&&(permanent||restricted.expires_at>ctx.now());
   const fullscreen=!!document.fullscreenElement,displayAllowed=fullscreen?settings?.show_projector:settings?.show_arena;
   const minimized=!enabled()||localHidden||ctx.announcement()||ctx.view()==='podium'||!displayAllowed;
-  region.dataset.minimized=String(!!minimized);region.dataset.composerOpen=String(composerOpen);region.hidden=!!fullscreen&&!settings?.show_projector;const backdrop=$('.arena-comment-backdrop');if(backdrop)backdrop.hidden=!composerOpen;
+  region.dataset.minimized=String(!!minimized);region.dataset.composerOpen=String(composerOpen);region.hidden=fullscreen?!settings?.show_projector:!displayAllowed&&!composerOpen;const backdrop=$('.arena-comment-backdrop');if(backdrop)backdrop.hidden=!composerOpen;
   const key=JSON.stringify([remaining,busy,enabled(),count,max,restrictedNow,minimized,message,composerOpen]);if(!force&&key===lastPaint)return;lastPaint=key;
   const stage=$('[data-comment-stage]');stage.hidden=!!minimized;
-  const b=$('[data-comment-send]');b.disabled=!enabled()||restrictedNow||busy||remaining>0||count<1||count>max;b.textContent=busy?'Sending…':remaining?'Wait '+remaining+'s':'Send Comment';input.disabled=!enabled()||restrictedNow;
+  const b=$('[data-comment-send]');b.disabled=!enabled()||restrictedNow||busy||remaining>0||count<1||count>max;b.textContent=busy?(settings?.ai_moderation?'Checking comment…':'Sending…'):remaining?'Wait '+remaining+'s':'Send Comment';input.disabled=!enabled()||restrictedNow||busy;
   $('[data-comment-count]').textContent=count+' / '+max;
   $('[data-comment-feedback]').textContent=!enabled()?'Live comments are '+(settings?.paused?'paused by Admin.':'disabled.'):(restrictedNow?(permanent?'Commenting restricted until Admin revokes.':'Commenting restricted · '+remaining+'s remaining.'):(remaining?'Comment cooldown · '+remaining+'s remaining.':message||'Text and emojis only. Keep it respectful.'));
   const t=$('[data-comment-toggle]');t.textContent=localHidden?'Show comments locally':'Hide comments locally';t.setAttribute('aria-pressed',String(localHidden));
